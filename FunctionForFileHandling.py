@@ -94,3 +94,11 @@ def type_file(directory):
             print("{} is a directory".format(fullname))
         else:
             print("{} is a file".format(fullname))
+
+
+def file_date(filename):
+    timestamp = os.path.getmtime(filename)
+    # Convert the timestamp into a readable format, then into a string
+    date = datetime.datetime.fromtimestamp(timestamp)
+    # Return just the date portion
+    return "{:%Y-%m-%d}".format(date)
