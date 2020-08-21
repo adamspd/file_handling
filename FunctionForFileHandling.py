@@ -21,6 +21,13 @@ def yes_or_no(invite):
 
 
 def create_file(filename):
+    """
+    :args filename
+    :return Name of file created and size
+
+    This function create the file the user asked for and to write a comment to put in the file created.
+
+    """
     comment = input('Write a short comment to put in the script. Must begin with "#": ')
     # Checking if file already exists
     if not os.path.exists(filename):
@@ -97,8 +104,19 @@ def type_file(directory):
 
 
 def file_date(filename):
-    timestamp = os.path.getmtime(filename)
-    # Convert the timestamp into a readable format, then into a string
-    date = datetime.datetime.fromtimestamp(timestamp)
-    # Return just the date portion
-    return "{:%Y-%m-%d}".format(date)
+    try:
+        timestamp = os.path.getmtime(filename)
+    except (FileNotFoundError, UnboundLocalError):
+        print("File not found !")
+    else:
+        # Convert the timestamp into a readable format, then into a string
+        date = datetime.datetime.fromtimestamp(timestamp)
+        # Return just the date portion
+        print("{:%Y-%m-%d}".format(date))
+        return "{:%Y-%m-%d}".format(date)
+
+
+def helpme():
+    com = input("Which command do you need help for?: ")
+    if com == "c":
+        help(create_file)
